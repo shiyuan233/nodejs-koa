@@ -1,0 +1,54 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(content="width=device-width, initial-scale=1.0" name="viewport")
+        meta(content="ie=edge" http-equiv="X-UA-Compatible")
+        title Document
+        link(
+            href="/admin/newsList.css"
+            rel="stylesheet"
+            type="text/css"
+        )
+        link(
+            href="/news/index.css"
+            rel="stylesheet"
+            type="text/css"
+        )
+    body
+        div
+            table(border="0")
+                tr
+                    th 标题
+                    th 类型
+                    th 国家
+                    th 缩略图
+                    th 操作
+                -for(let i =0;i<data.length;i++)
+                    tr
+                        td #{data[i].title}
+                        td #{data[i].tag}
+                        td 韩国
+                        td
+                            img(src=data[i].img width="140px")
+                        td
+                            a(href=`/admin/delete?id=${data[i].id}`)
+                                span.delBtn 删除
+            .pagination
+                a.prev(onclick=`prev(${pageNum},${total})`) ⌜
+                    -for(let i =0;i<total;i++)
+                        a(onclick=`jump(${i+1})`) #{i+1}
+                a.next(onclick=`next(${pageNum},${total})`) ⌝
+        script.
+            var iframeNode = parent.document.getElementById("mainPage")
+            function prev (pageNum){
+                iframeNode.src=`/admin/list?pageNum=${(pageNum-1)<1?1:(pageNum-1)}`
+            }
+            function jump(index){
+                iframeNode.src=`/admin/list?pageNum=${index}`
+            }
+            function next(pageNum){
+                console.log(`/admin/list?pageNum=${(pageNum+1)>5?5:(pageNum+1)}`)
+                iframeNode.src= `/admin/list?pageNum=${(pageNum+1)>5?5:(pageNum+1)}`
+            }
+            

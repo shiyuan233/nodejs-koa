@@ -6,12 +6,12 @@ html(lang='en')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
     title Document
   body
-    | 添加成功 
+    | #{data.info} 
     br
     span 5 
     | 秒后自动跳转...
     br
-    a(href='/admin/addNews') 点击我直接跳转
+    a(href='/admin/list') 点击我直接跳转
     script(type='text/javascript').
       let timer = document.querySelector("span").innerText;
       //- console.log(timer);
@@ -20,6 +20,6 @@ html(lang='en')
       timer--;
       document.querySelector("span").innerText = timer;
       if (timer < 1) {
-      window.location.href = `/admin/addNews`;
+      window.location.href = `/admin/list`;
       }
       }, 1000)

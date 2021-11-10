@@ -55,6 +55,8 @@ module.exports = {
         code: 0
       }
     }
-    ctx.render('./admin/message.pug')
+    await ctx.render('admin/message.pug', {
+      data: res
+    })
   }
 }
